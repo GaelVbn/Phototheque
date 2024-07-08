@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('partials/head.ejs') %>
+    <meta charset="UTF-8">
+<title><%= title %></title>
+
+</head>
+<body>
+    <%- include('partials/nav.ejs') %>
+
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col">
+                <a href="/albums" class="mt-4">&lt; Retour</a>
+                <h1>><%= album.title %></album</h1>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Ajouter une image
+                        </h5>
+
+                        <form method="POST" action="/albums/<%= album._id %>" class="form-inline" enctype="multipart/form-data">
+                            <input type="file" class="form-control-file" name="image">
+                            <button class="btn btn-primary" type="submit">Ajouter</button>
+                        </form>
+
+                        <% if (errors.length) { %>
+                            <div class="alert alert-danger mt-4 mb-2" role="alert">
+                               <%= errors[0] %>
+                            </div>
+                            <% } %>
+
+                    </div>
+                </div>
+             </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <% album.images.forEach((image, index) => { %>
+                <div class="col">
+                    <div class="card">
+                        <img src="/uploads/<%= album._id %>/<%= image %>" alt="<%= image %>" class="card-img-top">
+                        <div class="card-body">
+                            <h4><%= image %></h4>
+                            <a href="/albums/<%= album._id %>/delete/<%= index %>">Supprimer</a>
+                        </div>
+                    </div>
+                </div>
+             <% }) %>
+    </div>
+
+    <%- include('partials/scripts.ejs') %>
+</body>
+</html>

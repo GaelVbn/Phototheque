@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('partials/head.ejs') %>
+</head>
+<body>
+    <%- include('partials/nav.ejs') %>
+
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col">
+                <h1>Nouvel album</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form action="/albums/create" method="POST">
+                <div class="form-group">
+                    <label>Titre</label>
+                    <input type="text" class="form-control" name="albumTitle" placeholder="Titre de votre nouvel album" autofocus>
+
+                    <% if (errors.length) { %>
+                    <div class="alert alert-danger mt-4 mb-2" role="alert">
+                       <%= errors[0] %>
+                    </div>
+                    <% } %>
+                    
+                    <button type="submit" class="btn btn-primary mt-4">Créer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <%- include('partials/scripts.ejs') %>
+</body>
+</html>
